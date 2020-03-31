@@ -1,4 +1,4 @@
-import pytz, requests, telepot, time, timeago, datetime, json
+import os, pytz, requests, telepot, time, timeago, datetime, json
 from telepot.loop import MessageLoop
 
 now = datetime.datetime.now()

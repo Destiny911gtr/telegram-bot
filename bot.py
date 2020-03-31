@@ -1,10 +1,7 @@
-from gpiozero import CPUTemperature
-from mcstatus import MinecraftServer
 import pytz, requests, telepot, time, timeago, datetime, json
 from telepot.loop import MessageLoop
 
 now = datetime.datetime.now()
-server = MinecraftServer.lookup("34.93.103.98:25565")
 url = "https://api.covid19india.org/data.json"
 url2 = "https://api.covid19india.org/state_district_wise.json"
 data = ""
@@ -20,12 +17,6 @@ def action(msg):
         telegram_bot.sendMessage (chat_id, str("Yo, wassup?"))
     elif command == '/time':
         telegram_bot.sendMessage(chat_id, str(now.hour)+str(":")+str(now.minute))
-    elif command == '/temp':
-        cpu = CPUTemperature()
-        telegram_bot.sendMessage (chat_id, str(cpu.temperature)+str(" 'C"))
-    elif command == '/mcserver':
-        status = server.status()
-        telegram_bot.sendMessage(chat_id, str("The server has {0} players and replied in {1} ms".format(status.players.online, status.latency)))
     elif command == '/covid':
         data = ""
         data = getCovid()

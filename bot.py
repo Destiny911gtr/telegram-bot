@@ -52,9 +52,8 @@ if __name__ == "__main__":
     updater.dispatcher.add_handler(CommandHandler('district', get_dist))
 
     # Start the webhook
-    '''
     updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=TOKEN)
     updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
-    '''
+
     #updater.start_polling()
     updater.idle()

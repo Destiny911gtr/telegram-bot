@@ -18,17 +18,35 @@ def get_help(update, context):
     update.message.reply_text(HELP_TEXT)
 
 def get_info(update, context):
-    if len(context.args) >= 1:
-        state = str(context.args).capitalize()
+    if len(context.args) == 1:
+        state = "".join(context.args).capitalize()
         data = Statewise.getCovid(state)
+        update.message.reply_text(data)
+    elif len(context.args) > 1:
+        state = str()
+        for i in context.args:
+            if i == 'and':
+                state += i + " "
+            else:
+                state += i.capitalize() + " "
+        data = Statewise.getCovid(state[:len(state)-1])
         update.message.reply_text(data)
     else:
         update.message.reply_text("Usage: /covid <state_name>")
 
 def get_dist(update, context):
-    if len(context.args) >= 1:
-        state = str(context.args).capitalize()
+    if len(context.args) == 1:
+        state = "".join(context.args).capitalize()
         data = District.getDistricts(state)
+        update.message.reply_text(data)
+    elif len(context.args) > 1:
+        state = str()
+        for i in context.args:
+            if i == 'and':
+                state += i + " "
+            else:
+                state += i.capitalize() + " "
+        data = District.getDistricts(state[:len(state)-1])
         update.message.reply_text(data)
     else:
         update.message.reply_text("Usage: /district <state_name>")

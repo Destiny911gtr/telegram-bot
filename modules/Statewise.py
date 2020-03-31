@@ -13,6 +13,9 @@ def getCovid(state="Kerala"):
         if j["state"] == state:
              k = j
              break
+    else:
+        failed = "Wrong input. Visit https://www.covid19india.org/ for more info."
+        return failed
     reft = str(k['lastupdatedtime'])
     date = reft.split(" ", 1)[0]
     day = date.split("/", 2)[0]

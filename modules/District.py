@@ -5,8 +5,12 @@ url = "https://api.covid19india.org/state_district_wise.json"
 def getDistricts(state="Kerala"):
     json_url = requests.get(url)
     data = json.loads(json_url.text)
-    district = data[state]["districtData"]
-    distdata = str("District-wise Reports\n\n")
-    for key,value in district.items():
-        distdata = distdata + str("{} : {}\n".format(key,value["confirmed"]))
-    return distdata
+    if state in data:
+        district = data[state]["districtData"]
+        distdata = str("District-wise Reports\n\n")
+        for key,value in district.items():
+            distdata = distdata + str("{} : {}\n".format(key,value["confirmed"]))
+        return distdata
+    else:
+        failed = "Wrong input. Visit https://www.covid19india.org/ for more info."
+        return failed

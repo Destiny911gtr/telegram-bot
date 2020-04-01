@@ -30,7 +30,7 @@ def get_info(update, context):
         data = Statewise.getCovid(state[:len(state)-1])
         update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
-        update.message.reply_text("Usage: /covid <state_name>")
+        update.message.reply_text("Usage: /covid state_name")
 
 def get_dist(update, context):
     if len(context.args) == 1:
@@ -47,7 +47,7 @@ def get_dist(update, context):
         data = District.getDistricts(state[:len(state)-1])
         update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
-        update.message.reply_text("Usage: /district <state_name>")
+        update.message.reply_text("Usage: /district state_name")
 
 def get_delta(update, context):
     if len(context.args) == 1:
@@ -64,8 +64,24 @@ def get_delta(update, context):
         data = Statewise.getDelta(state[:len(state)-1])
         update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
-        update.message.reply_text("Usage: /covid <state_name>")
+        update.message.reply_text("Usage: /new_case state_name")
 
+def get_ddelta(update, context):
+    if len(context.args) == 1:
+        state = "".join(context.args).capitalize()
+        data = District.getDelta(state)
+        update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+    elif len(context.args) > 1:
+        state = str()
+        for i in context.args:
+            if i == 'and':
+                state += i + " "
+            else:
+                state += i.capitalize() + " "
+        data = District.getDelta(state[:len(state)-1])
+        update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+    else:
+        update.message.reply_text("Usage: /new_case_dist state_name")
 
 if __name__ == "__main__":
     TOKEN = os.getenv('TOKEN')
@@ -85,6 +101,7 @@ if __name__ == "__main__":
     updater.dispatcher.add_handler(CommandHandler('covid19', get_info))
     updater.dispatcher.add_handler(CommandHandler('district', get_dist))
     updater.dispatcher.add_handler(CommandHandler('new_case', get_delta))
+    updater.dispatcher.add_handler(CommandHandler('new_case_dist', get_ddelta))
 
     # Start the webhook
     updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=TOKEN)

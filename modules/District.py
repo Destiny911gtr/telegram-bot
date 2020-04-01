@@ -12,5 +12,5 @@ def getDistricts(state="Kerala"):
             distdata = distdata + str("{} : {}\n".format(key,value["confirmed"]))
         return distdata
     else:
-        failed = "Wrong input. Visit https://www.covid19india.org/ for more info."
+        failed = "Wrong input. Eg - /district Kerala \n\nVisit https://www.covid19india.org/ for more info."
         return failed

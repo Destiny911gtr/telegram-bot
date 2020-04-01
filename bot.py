@@ -64,7 +64,7 @@ if __name__ == "__main__":
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CommandHandler('about', about))
     updater.dispatcher.add_handler(CommandHandler('help', get_help))
-    updater.dispatcher.add_handler(CommandHandler('covid', get_info))
+    updater.dispatcher.add_handler(CommandHandler('covid19', get_info))
     updater.dispatcher.add_handler(CommandHandler('district', get_dist))
 
     # Start the webhook

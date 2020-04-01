@@ -49,6 +49,24 @@ def get_dist(update, context):
     else:
         update.message.reply_text("Usage: /district <state_name>")
 
+def get_delta(update, context):
+    if len(context.args) == 1:
+        state = "".join(context.args).capitalize()
+        data = Statewise.getDelta(state)
+        update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+    elif len(context.args) > 1:
+        state = str()
+        for i in context.args:
+            if i == 'and':
+                state += i + " "
+            else:
+                state += i.capitalize() + " "
+        data = Statewise.getDelta(state[:len(state)-1])
+        update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+    else:
+        update.message.reply_text("Usage: /covid <state_name>")
+
+
 if __name__ == "__main__":
     TOKEN = os.getenv('TOKEN')
 
@@ -66,6 +84,7 @@ if __name__ == "__main__":
     updater.dispatcher.add_handler(CommandHandler('help', get_help))
     updater.dispatcher.add_handler(CommandHandler('covid19', get_info))
     updater.dispatcher.add_handler(CommandHandler('district', get_dist))
+    updater.dispatcher.add_handler(CommandHandler('new_case', get_delta))
 
     # Start the webhook
     updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=TOKEN)

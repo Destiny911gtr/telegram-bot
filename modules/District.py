@@ -12,7 +12,7 @@ def getDistricts(state="Kerala"):
             distdata = distdata + str("{} : {}\n".format(key,value["confirmed"]))
         return distdata
     else:
-        failed = "Wrong input. Eg - /district Kerala \n\nVisit https://www.covid19india.org/ for more info."
+        failed = "Wrong input. Eg - /idist Kerala \n\nVisit https://www.covid19india.org/ for more info."
         return failed
 
 def getDelta(state="Kerala"):
@@ -25,5 +25,5 @@ def getDelta(state="Kerala"):
             distdata = distdata + str("{} : {}\n".format(key,value["delta"]["confirmed"]))
         return distdata
     else:
-        failed = "Wrong input. Eg - /new_case_dist Kerala \n\nVisit https://www.covid19india.org/ for more info."
+        failed = "Wrong input. Eg - /inew_dist Kerala \n\nVisit https://www.covid19india.org/ for more info."
         return failed

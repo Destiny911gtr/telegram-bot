@@ -4,7 +4,7 @@ from modules import Statewise, District
 import logging, os
 START_TEXT = 'COVID-19 info bot. Type /help to see what i can do'
 ABOUT_TEXT = 'Bot made by [Dhanush Krishnan](https://t.me/Ded_Boi) and [Marvin Clement](https://t.me/Credance). Forked from [PokeBot](https://t.me/Veg_Pokedex_Bot) ([Source](https://github.com/kshatriya-abhay/pokebot))'
-HELP_TEXT = "List of available commands: \n/help - Get this list \n/covid <i>state-name</i> - <i>Info on covid infection for specified state</i> \n<b>Example - /state Kerala</b> \n/district <i>state-name</i> - <i>Info on covid infection for each district in specified state</i> \n<b>Example - /district Kerala</b>"
+HELP_TEXT = "List of available commands: \n/help - Get this list \n/icovid <i>state-name</i> - <i>Info on covid infection for specified state (India)</i> \n<b>Example - /icovid Kerala</b> \n/idist <i>state-name</i> - <i>Info on covid infection for each district in specified state (India)</i> \n<b>Example - /district Kerala</b> \n/inew <i>state_name</i> - <i>Shows number of new cases in your state from last refresh (India)</i> \n<b>Example - /inew Kerala</b> \n/inew_dist <i>state_name</i> - <i>Shows number of new cases in each districts in your state from last refresh (India)</i> \n<b>Example - /inew_dist Kerala</b>"
 
 def start(update, context):
     update.message.reply_text(text = START_TEXT)
@@ -30,7 +30,7 @@ def get_info(update, context):
         data = Statewise.getCovid(state[:len(state)-1])
         update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
-        update.message.reply_text("Usage: /covid state_name")
+        update.message.reply_text("Usage: /icovid state_name")
 
 def get_dist(update, context):
     if len(context.args) == 1:
@@ -47,7 +47,7 @@ def get_dist(update, context):
         data = District.getDistricts(state[:len(state)-1])
         update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
-        update.message.reply_text("Usage: /district state_name")
+        update.message.reply_text("Usage: /idist state_name")
 
 def get_delta(update, context):
     if len(context.args) == 1:
@@ -64,7 +64,7 @@ def get_delta(update, context):
         data = Statewise.getDelta(state[:len(state)-1])
         update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
-        update.message.reply_text("Usage: /new_case state_name")
+        update.message.reply_text("Usage: /inew state_name")
 
 def get_ddelta(update, context):
     if len(context.args) == 1:
@@ -81,7 +81,7 @@ def get_ddelta(update, context):
         data = District.getDelta(state[:len(state)-1])
         update.message.reply_text(data, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
-        update.message.reply_text("Usage: /new_case_dist state_name")
+        update.message.reply_text("Usage: /inew_dist state_name")
 
 if __name__ == "__main__":
     TOKEN = os.getenv('TOKEN')
@@ -98,10 +98,10 @@ if __name__ == "__main__":
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CommandHandler('about', about))
     updater.dispatcher.add_handler(CommandHandler('help', get_help))
-    updater.dispatcher.add_handler(CommandHandler('covid19', get_info))
-    updater.dispatcher.add_handler(CommandHandler('district', get_dist))
-    updater.dispatcher.add_handler(CommandHandler('new_case', get_delta))
-    updater.dispatcher.add_handler(CommandHandler('new_case_dist', get_ddelta))
+    updater.dispatcher.add_handler(CommandHandler('icovid', get_info))
+    updater.dispatcher.add_handler(CommandHandler('idist', get_dist))
+    updater.dispatcher.add_handler(CommandHandler('inew', get_delta))
+    updater.dispatcher.add_handler(CommandHandler('inew_dist', get_ddelta))
 
     # Start the webhook
     updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=TOKEN)

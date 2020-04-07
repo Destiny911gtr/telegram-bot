@@ -7,23 +7,10 @@ def getDistricts(state="Kerala"):
     data = json.loads(json_url.text)
     if state in data:
         district = data[state]["districtData"]
-        distdata = str("District-wise Reports\n\n")
+        distdata = str("<b><u>District-wise Reports</u></b>\n\n")
         for key,value in district.items():
-            distdata = distdata + str("{} : {}\n".format(key,value["confirmed"]))
+            distdata = distdata + str("<code>> {} : {}</code>\n".format(key,value["confirmed"]))
         return distdata
     else:
-        failed = "Wrong input. Eg - /idist Kerala \n\nVisit https://www.covid19india.org/ for more info."
-        return failed
-
-def getDelta(state="Kerala"):
-    json_url = requests.get(url)
-    data = json.loads(json_url.text)
-    if state in data:
-        district = data[state]["districtData"]
-        distdata = str("District-wise Reports\n\n")
-        for key,value in district.items():
-            distdata = distdata + str("{} : {}\n".format(key,value["delta"]["confirmed"]))
-        return distdata
-    else:
-        failed = "Wrong input. Eg - /inew_dist Kerala \n\nVisit https://www.covid19india.org/ for more info."
+        failed = "Wrong input. Eg - /dist Kerala \n\nVisit https://www.covid19india.org/ for more info."
         return failed

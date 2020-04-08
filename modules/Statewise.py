@@ -14,7 +14,7 @@ def getCovid(state="Kerala"):
              k = j
              break
     else:
-        failed = "Wrong input. Eg - /covid Kerala \n\nVisit https://www.covid19india.org/ for more info."
+        failed = "Wrong input. Eg - <code>/covid Kerala</code> \n\nVisit https://www.covid19india.org/ for more info."
         return failed
     reft = str(k['lastupdatedtime'])
     date = reft.split(" ", 1)[0]

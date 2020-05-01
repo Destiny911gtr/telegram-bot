@@ -9,7 +9,7 @@ def getDistricts(state="Kerala"):
         district = data[state]["districtData"]
         distdata = str("<b><u>District-wise Reports</u></b>\n\n")
         for key,value in district.items():
-            distdata = distdata + str("<code>> {} : {}</code>\n".format(key,value["confirmed"]))
+            distdata = distdata + str("<code>> {} : {}</code>\n".format(key,value["active"]))
         return distdata
     else:
         failed = "Wrong input. Eg - <code>/dist Kerala</code> \n\nVisit https://www.covid19india.org/ for more info."

@@ -56,7 +56,7 @@ def send_app(update, context):
 if __name__ == "__main__":
     TOKEN = os.getenv('TOKEN')
 
-    NAME = "covid19info-bot"
+    NAME = "covid19-dedm8"
 
     # Port is given by Heroku
     PORT = os.environ.get('PORT')
